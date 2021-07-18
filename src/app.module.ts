@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLModule } from '@nestjs/graphql';
+
+import { RecipesModule } from './recipes/recipes.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    RecipesModule,
+    GraphQLModule.forRoot({
+      debug: true,
+      autoSchemaFile: 'schema.gql',
+      // typePaths: ['./**/*.graphql'],
+    }),
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
